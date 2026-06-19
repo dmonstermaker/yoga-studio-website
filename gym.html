@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transform in 90 Days — John Carter | Personal Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --orange:#FF5A1F;
+  --orange-dk:#D94714;
+  --orange-glow:rgba(255,90,31,0.18);
+  --bg:#0E0E0F;
+  --bg2:#161618;
+  --bg3:#1E1E21;
+  --border:#2A2A2E;
+  --text:#F0EEE9;
+  --muted:#8A8A94;
+  --light-bg:#F5F4F1;
+  --light-text:#111113;
+  --light-muted:#6B6B74;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+
+/* ── UTILITY ── */
+.container{max-width:960px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
+.eyebrow-light{color:var(--orange)}
+
+h1,h2,h3,h4{font-family:'Barlow Condensed',sans-serif;font-weight:900;line-height:1.05;text-transform:uppercase;letter-spacing:.02em}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;text-decoration:none;border:none;border-radius:3px;cursor:pointer;transition:all .18s ease}
+.btn-fire{background:var(--orange);color:#fff}
+.btn-fire:hover{background:var(--orange-dk);transform:translateY(-2px)}
+.btn-fire svg{width:18px;height:18px;flex-shrink:0}
+.btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--border)}
+.btn-ghost:hover{border-color:var(--orange);color:var(--orange)}
+.btn-dark{background:var(--light-text);color:#fff}
+.btn-dark:hover{background:#2a2a2e;transform:translateY(-2px)}
+
+/* ── TOP BAR ── */
+.top-bar{background:var(--orange);text-align:center;padding:10px 20px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.top-bar strong{color:#fff;font-weight:800}
+
+/* ── HERO ── */
+.hero{background:var(--bg);padding:80px 24px 70px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(ellipse at center,rgba(255,90,31,.13) 0%,transparent 70%);pointer-events:none}
+.hero .eyebrow{margin-bottom:20px}
+.hero h1{font-size:clamp(46px,8vw,88px);color:var(--text);max-width:800px;margin:0 auto 24px;line-height:.97}
+.hero h1 em{color:var(--orange);font-style:normal}
+.hero .hero-sub{font-size:17px;color:var(--muted);max-width:520px;margin:0 auto 40px;line-height:1.7;font-weight:400}
+.hero-media{max-width:680px;margin:0 auto 48px;border-radius:6px;overflow:hidden;position:relative}
+.hero-media-inner{width:100%;height:340px;background:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80') center/cover no-repeat;position:relative}
+.hero-media-inner::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(14,14,15,.7) 0%,transparent 60%)}
+.play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:68px;height:68px;background:rgba(255,90,31,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;cursor:pointer;transition:background .2s}
+.play-btn:hover{background:var(--orange)}
+.play-btn svg{width:26px;height:26px;fill:#fff;margin-left:4px}
+.hero-stats{display:flex;justify-content:center;gap:0;max-width:520px;margin:0 auto 44px;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:var(--bg2)}
+.hero-stat{flex:1;padding:18px 10px;text-align:center;border-right:1px solid var(--border)}
+.hero-stat:last-child{border-right:none}
+.hero-stat-val{font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:900;color:var(--orange);line-height:1}
+.hero-stat-label{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+
+/* ── RESULTS (light) ── */
+.results-section{background:var(--light-bg);padding:80px 24px;text-align:center}
+.results-section h2{font-size:clamp(34px,5vw,58px);color:var(--light-text);margin-bottom:50px}
+.results-section .eyebrow{color:var(--orange)}
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:900px;margin:0 auto}
+.result-card{background:#fff;border-radius:6px;overflow:hidden;border:1px solid #E0DEDB;text-align:left}
+.result-card-imgs{display:grid;grid-template-columns:1fr 1fr}
+.img-wrap{position:relative}
+.ba-img{width:100%;height:170px;display:block;object-fit:cover}
+.img-tag{position:absolute;bottom:0;left:0;right:0;padding:5px 8px;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.5);text-align:center}
+.img-tag.after-tag{background:var(--orange)}
+.result-card-body{padding:18px 20px}
+.result-card-body h3{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--orange);text-transform:uppercase;margin-bottom:8px;letter-spacing:.03em}
+.result-card-body p{font-size:13px;color:#555;line-height:1.6;font-style:italic}
+.result-card-body .attr{font-size:12px;font-weight:600;color:var(--light-text);margin-top:8px;font-style:normal}
+
+/* ── WHY US (dark) ── */
+.why-section{background:var(--bg);padding:90px 24px;text-align:center}
+.why-section h2{font-size:clamp(32px,5vw,56px);color:var(--text);margin-bottom:14px}
+.why-section h2 span{color:var(--orange)}
+.why-intro{font-size:16px;color:var(--muted);margin-bottom:52px;max-width:540px;margin-left:auto;margin-right:auto}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;max-width:900px;margin:0 auto 50px;background:var(--border);border:1px solid var(--border);border-radius:5px;overflow:hidden}
+.feature-card{background:var(--bg2);padding:32px 26px;text-align:left;transition:background .2s}
+.feature-card:hover{background:var(--bg3)}
+.feature-icon{width:40px;height:40px;border-radius:8px;background:var(--orange-glow);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.feature-icon svg{width:20px;height:20px;stroke:var(--orange);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.feature-card h4{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;color:var(--text);margin-bottom:14px;letter-spacing:.04em}
+.feature-card ul{list-style:none}
+.feature-card ul li{font-size:13px;color:var(--muted);padding:6px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.feature-card ul li:last-child{border-bottom:none}
+.feature-card ul li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--orange);flex-shrink:0;margin-top:6px}
+
+/* ── HOW IT WORKS ── */
+.how-section{background:var(--bg2);padding:90px 24px;text-align:center}
+.how-section h2{font-size:clamp(32px,5vw,56px);color:var(--text);margin-bottom:60px}
+.steps{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:0}
+.step-row{display:grid;grid-template-columns:64px 1fr;gap:24px;align-items:flex-start;padding:32px 0;border-bottom:1px solid var(--border);text-align:left}
+.step-row:first-child{padding-top:0}
+.step-row:last-child{border-bottom:none;padding-bottom:0}
+.step-num-wrap{display:flex;flex-direction:column;align-items:center;gap:0}
+.step-num{font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;color:var(--orange);line-height:1}
+.step-line{width:2px;flex:1;background:var(--border);margin-top:8px;min-height:30px}
+.step-row:last-child .step-line{display:none}
+.step-body h3{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;color:var(--text);text-transform:uppercase;margin-bottom:8px;letter-spacing:.04em;padding-top:10px}
+.step-body p{font-size:14px;color:var(--muted);line-height:1.7}
+
+/* ── WHO IS THIS FOR ── */
+.who-section{background:var(--bg);padding:90px 24px;text-align:center}
+.who-section h2{font-size:clamp(32px,5vw,56px);color:var(--text);margin-bottom:44px}
+.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:860px;margin:0 auto 48px;text-align:left}
+.who-card{background:var(--bg2);border:1px solid var(--border);border-radius:5px;padding:22px 24px;display:flex;gap:16px;align-items:flex-start;transition:border-color .2s}
+.who-card:hover{border-color:var(--orange)}
+.who-check{width:26px;height:26px;border-radius:50%;background:var(--orange-glow);border:1.5px solid var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.who-check svg{width:13px;height:13px;stroke:var(--orange);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.who-card p{font-size:14px;color:var(--muted);line-height:1.6}
+.who-card strong{color:var(--text);font-weight:600}
+
+/* ── MEET COACH ── */
+.meet-section{background:var(--bg2);padding:90px 24px}
+.meet-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:640px){.meet-inner{grid-template-columns:1fr}}
+.coach-img-wrap{position:relative}
+.coach-img{width:100%;height:400px;display:block;border-radius:6px;background:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80') center/cover no-repeat}
+.coach-badge{position:absolute;bottom:-16px;right:-16px;background:var(--orange);border-radius:5px;padding:18px 22px;text-align:center}
+.coach-badge-val{font-family:'Barlow Condensed',sans-serif;font-size:38px;font-weight:900;color:#fff;line-height:1}
+.coach-badge-label{font-size:11px;font-weight:600;color:rgba(255,255,255,.8);text-transform:uppercase;letter-spacing:.12em;margin-top:2px}
+.meet-text .eyebrow{margin-bottom:10px}
+.meet-text h2{font-size:clamp(28px,4vw,48px);color:var(--text);margin-bottom:20px}
+.meet-text p{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:14px}
+.credential-row{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 28px}
+.cred-pill{display:inline-flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:500;color:var(--muted)}
+.cred-pill svg{width:13px;height:13px;stroke:var(--orange);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── FAQ ── */
+.faq-section{background:var(--bg);padding:90px 24px;text-align:center}
+.faq-section h2{font-size:clamp(32px,5vw,56px);color:var(--text);margin-bottom:50px}
+.faq-section h2 em{color:var(--orange);font-style:normal}
+.faq-list{max-width:680px;margin:0 auto;text-align:left}
+.faq-item{border-top:1px solid var(--border)}
+.faq-item:last-child{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;background:none;border:none;color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left}
+.faq-icon{width:28px;height:28px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s}
+.faq-icon svg{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2.5;stroke-linecap:round;transition:stroke .2s,transform .25s}
+.faq-item.open .faq-icon{background:var(--orange-glow);border-color:var(--orange)}
+.faq-item.open .faq-icon svg{stroke:var(--orange);transform:rotate(45deg)}
+.faq-a{font-size:14px;color:var(--muted);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:22px}
+
+/* ── CTA FINAL ── */
+.cta-section{background:var(--bg2);padding:100px 24px;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:600px;height:400px;background:radial-gradient(ellipse at center,rgba(255,90,31,.12) 0%,transparent 70%);pointer-events:none}
+.cta-section .eyebrow{margin-bottom:16px}
+.cta-section h2{font-size:clamp(42px,7vw,80px);color:var(--text);margin-bottom:10px;position:relative}
+.cta-section .cta-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(26px,4vw,40px);color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:40px;position:relative}
+.cta-section .btn{position:relative}
+.cta-note{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+
+/* ── FOOTER ── */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:28px 24px;text-align:center;font-size:12px;color:var(--muted);letter-spacing:.06em}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--orange)}
+
+/* ── BEFORE/AFTER IMAGES ── */
+.ba-before-a{background:url('https://images.unsplash.com/photo-1594381898411-846e7d193883?w=400&q=80') center/cover no-repeat}
+.ba-after-a{background:url('https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=400&q=80') center/cover no-repeat}
+.ba-before-b{background:url('https://images.unsplash.com/photo-1616279969862-6d666fc1723b?w=400&q=80') center/cover no-repeat}
+.ba-after-b{background:url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=400&q=80') center/cover no-repeat}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .features-grid{grid-template-columns:1fr}
+  .hero-stats{flex-direction:row}
+  .who-grid{grid-template-columns:1fr}
+  .coach-badge{right:8px;bottom:-8px}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  🔥 New client special — <strong>Free consultation (valued at $150)</strong> — Limited spots available
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">Personal Training · Nutrition · Results</div>
+  <h1>LOSE FAT.<br>BUILD STRENGTH.<br><em>IN 90 DAYS.</em></h1>
+  <p class="hero-sub">A proven, coach-led system built for busy people. No guesswork. No fad diets. Just a clear plan, daily accountability, and real transformation.</p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-val">50+</div>
+      <div class="hero-stat-label">Clients transformed</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-val">90</div>
+      <div class="hero-stat-label">Day program</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-val">15yr</div>
+      <div class="hero-stat-label">Coaching experience</div>
+    </div>
+  </div>
+
+  <div class="hero-media">
+    <div class="hero-media-inner">
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <a href="#cta" class="btn btn-fire">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    Claim Your Free Call
+  </a>
+  <div style="margin-top:14px;font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;font-weight:500">No credit card · No commitment</div>
+</section>
+
+<!-- RESULTS 1 -->
+<section class="results-section">
+  <div class="eyebrow eyebrow-light">Real clients · Real results</div>
+  <h2>TRANSFORMATIONS THAT SPEAK</h2>
+  <div class="results-grid">
+    <div class="result-card">
+      <div class="result-card-imgs">
+        <div class="img-wrap">
+          <div class="ba-img ba-before-a"></div>
+          <div class="img-tag">Before</div>
+        </div>
+        <div class="img-wrap">
+          <div class="ba-img ba-after-a"></div>
+          <div class="img-tag after-tag">After</div>
+        </div>
+      </div>
+      <div class="result-card-body">
+        <h3>38 lbs lost in 3 months</h3>
+        <p>"I never thought I'd lose this much weight without giving up my favourite foods. This program completely changed my relationship with eating and training."</p>
+        <div class="attr">— Victoria M., 38</div>
+      </div>
+    </div>
+    <div class="result-card">
+      <div class="result-card-imgs">
+        <div class="img-wrap">
+          <div class="ba-img ba-before-b"></div>
+          <div class="img-tag">Before</div>
+        </div>
+        <div class="img-wrap">
+          <div class="ba-img ba-after-b"></div>
+          <div class="img-tag after-tag">After</div>
+        </div>
+      </div>
+      <div class="result-card-body">
+        <h3>40 lbs lost in 3 months</h3>
+        <p>"Mental preparation is just as important as physical training. This program taught me both. The coach's approach is unlike anything I'd tried before."</p>
+        <div class="attr">— Davis K., 42</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section">
+  <div class="eyebrow">Why over 50 clients chose us</div>
+  <h2>WE DON'T SELL SHORTCUTS.<br><span>WE BUILD ATHLETES.</span></h2>
+  <p class="why-intro">Every program is built around your body, your schedule, and your goals — backed by 15 years of real coaching experience.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h4>Personalised Approach</h4>
+      <ul>
+        <li>Custom nutrition plans built for you</li>
+        <li>Workouts matched to your schedule</li>
+        <li>1-on-1 coaching every week</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <h4>Sustainable Results</h4>
+      <ul>
+        <li>No crash diets or gimmicks</li>
+        <li>Lifestyle-first strategies that stick</li>
+        <li>Skills for lifelong health</li>
+        <li>Zero yo-yo cycling</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <h4>Ongoing Support</h4>
+      <ul>
+        <li>Weekly progress check-ins</li>
+        <li>Direct message access 24/7</li>
+        <li>Accountability that keeps you moving</li>
+        <li>Community of driven peers</li>
+      </ul>
+    </div>
+  </div>
+  <a href="#cta" class="btn btn-fire">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Book a Free Consultation
+  </a>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="eyebrow">Simple. Structured. Effective.</div>
+  <h2>HOW THE PROGRAM WORKS</h2>
+  <div class="steps">
+    <div class="step-row">
+      <div class="step-num-wrap">
+        <div class="step-num">01</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <h3>Initial Assessment</h3>
+        <p>We dig into your health history, lifestyle, current habits, and goals. No templates — this session is the foundation of your bespoke program.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-wrap">
+        <div class="step-num">02</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <h3>Your Custom Plan</h3>
+        <p>Receive a detailed nutrition and training plan built specifically for your body, schedule, and preferences. Clear, actionable, zero guesswork.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-wrap">
+        <div class="step-num">03</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <h3>Weekly Coaching Sessions</h3>
+        <p>Regular check-ins to track progress, refine the plan, and keep motivation high. Your coach adjusts everything in real time based on results.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-wrap">
+        <div class="step-num">04</div>
+      </div>
+      <div class="step-body">
+        <h3>Transformation & Beyond</h3>
+        <p>By 90 days you have a body you're proud of and habits that last. The lifestyle changes stick because you built them — not followed a script.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IS THIS FOR -->
+<section class="who-section">
+  <div class="eyebrow">Is this right for you?</div>
+  <h2>WHO THIS IS BUILT FOR</h2>
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="who-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <p><strong>Busy professionals</strong> who want results without living at the gym or sacrificing their social life.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <p><strong>People who've tried before</strong> and failed — and are ready for a structured, personalised approach instead.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <p><strong>Anyone overwhelmed</strong> by conflicting fitness advice who wants one clear, science-backed roadmap.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <p><strong>Goal-driven individuals</strong> who want real accountability, not just a YouTube playlist to follow alone.</p>
+    </div>
+  </div>
+  <a href="#cta" class="btn btn-fire">Start Your Free Consultation</a>
+</section>
+
+<!-- RESULTS 2 -->
+<section class="results-section">
+  <div class="eyebrow eyebrow-light">More proof</div>
+  <h2>MORE CLIENT WINS</h2>
+  <div class="results-grid">
+    <div class="result-card">
+      <div class="result-card-imgs">
+        <div class="img-wrap">
+          <div class="ba-img ba-before-a"></div>
+          <div class="img-tag">Before</div>
+        </div>
+        <div class="img-wrap">
+          <div class="ba-img ba-after-a"></div>
+          <div class="img-tag after-tag">After</div>
+        </div>
+      </div>
+      <div class="result-card-body">
+        <h3>36 lbs lost in 4 months</h3>
+        <p>"After years of struggling, the personalised approach finally clicked. I'm in the best shape of my adult life. My kids can't believe the change."</p>
+        <div class="attr">— Jennifer B., 31</div>
+      </div>
+    </div>
+    <div class="result-card">
+      <div class="result-card-imgs">
+        <div class="img-wrap">
+          <div class="ba-img ba-before-b"></div>
+          <div class="img-tag">Before</div>
+        </div>
+        <div class="img-wrap">
+          <div class="ba-img ba-after-b"></div>
+          <div class="img-tag after-tag">After</div>
+        </div>
+      </div>
+      <div class="result-card-body">
+        <h3>52 lbs lost in 6 months</h3>
+        <p>"As a dad with a packed schedule, I never thought I'd stick to anything. The weekly accountability sessions changed everything for me."</p>
+        <div class="attr">— Michael T., 44</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEET COACH -->
+<section class="meet-section">
+  <div class="meet-inner">
+    <div class="coach-img-wrap">
+      <div class="coach-img"></div>
+      <div class="coach-badge">
+        <div class="coach-badge-val">15+</div>
+        <div class="coach-badge-label">Years coaching</div>
+      </div>
+    </div>
+    <div class="meet-text">
+      <div class="eyebrow">Your Coach</div>
+      <h2>MEET JOHN CARTER</h2>
+      <p>John isn't just a trainer — he's been in your shoes. A former corporate executive who battled his own weight for years, he built a system from evidence-based science that works for real people with demanding lives.</p>
+      <p>With over 1,200 coaching sessions logged and dozens of transformations to his name, John's approach combines precision nutrition, smart progressive training, and the mindset work most coaches skip entirely.</p>
+      <div class="credential-row">
+        <div class="cred-pill">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          NASM Certified PT
+        </div>
+        <div class="cred-pill">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Precision Nutrition Coach
+        </div>
+        <div class="cred-pill">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          1,200+ Sessions
+        </div>
+      </div>
+      <a href="#cta" class="btn btn-fire">Work With John</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="eyebrow">Got questions?</div>
+  <h2>FREQUENTLY <em>ASKED</em><br>QUESTIONS</h2>
+  <div class="faq-list">
+    <div class="faq-item open">
+      <button class="faq-q">
+        Is genetics a barrier to fat loss?
+        <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </button>
+      <div class="faq-a">Genetics influence metabolism and body composition — but they don't dictate destiny. Our program is built around your individual biology, making sustainable fat loss achievable for virtually everyone who commits to the process.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">
+        What happens in a coaching session?
+        <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </button>
+      <div class="faq-a">Sessions are practical and energising. We review your data, troubleshoot any obstacles, adjust the plan where needed, and set clear actions for the week. You always leave with clarity and a renewed sense of direction.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">
+        Can coaching fix my eating habits?
+        <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </button>
+      <div class="faq-a">Absolutely. Emotional eating is one of the biggest blockers our clients face. We address the root causes — stress, sleep, triggers — not just calories. Most clients see measurable improvements in their relationship with food within the first month.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">
+        How much time do I need each week?
+        <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </button>
+      <div class="faq-a">Plan for 3–5 workouts (20–45 min each), one coaching session (30 min), and roughly an hour for meal prep. As the habits bed in, the time investment shrinks because the behaviours become automatic.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">
+        Do I need a gym membership?
+        <div class="faq-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </button>
+      <div class="faq-a">Not at all. Many clients train entirely at home with minimal equipment. Whether you're in a commercial gym, a garage, or a living room — we build a plan that works with what you have.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section" id="cta">
+  <div class="eyebrow">It's time to make the move</div>
+  <h2>THE BEST DAY<br>TO START IS TODAY.</h2>
+  <div class="cta-sub">Claim your free consultation call</div>
+  <a href="#" class="btn btn-fire" style="font-size:22px;padding:20px 48px">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.58 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.87-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Book Your Free Call
+  </a>
+  <div class="cta-note">Limited spots · No credit card required · Cancel anytime</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2024 John Carter Fitness · <a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></p>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
